@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const RainfallDisplay = () => {
-    const [rainfall, setRainfall] = useState(null);
+    const [rainfallDetails, setRainfallDetails] = useState([]);
 
     const fetchRainfallData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/rainfall/fetch');
-            setRainfall(response.data.totalRainfall);
+            const fetchedData = response.data.rainfallDetails;
+
+            if (Array.isArray(fetchedData)) {
+                setRainfallDetails(fetchedData);
+            } else {
+                console.error("Expected an array but received: ", fetchedData);
+            }
         } catch (error) {
             console.error('Error fetching rainfall data:', error);
         }
@@ -22,8 +28,17 @@ const RainfallDisplay = () => {
     return (
         <div>
             <h1>Rainfall Data</h1>
-            {rainfall !== null ? (
-                <p>Current Rainfall: {rainfall} mm</p>
+            {rainfallDetails && rainfallDetails.length > 0 ? (
+                rainfallDetails.map((station, index) => (
+                    <div key={index}>
+                        <p><strong>Station Name:</strong> {station.stationName}</p>
+                        <p><strong>Status:</strong> {station.status}</p>
+                        <p><strong>Basin:</strong> {station.basin}</p>
+                        <p><strong>Longitude:</strong> {station.longitude}</p>
+                        <p><strong>Latitude:</strong> {station.latitude}</p>
+                        <hr />
+                    </div>
+                ))
             ) : (
                 <p>Loading...</p>
             )}
