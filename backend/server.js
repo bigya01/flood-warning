@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+
 const rainfallRoutes = require('./routes/rainfallRoutes');
 
-const app = express();
 dotenv.config();
+
+
+const app = express();
 
 // Middleware
 app.use(cors());
