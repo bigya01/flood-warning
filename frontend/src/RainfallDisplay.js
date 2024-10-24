@@ -36,6 +36,7 @@ const RainfallDisplay = () => {
                         <p><strong>Basin:</strong> {station.basin}</p>
                         <p><strong>Longitude:</strong> {station.longitude}</p>
                         <p><strong>Latitude:</strong> {station.latitude}</p>
+                       
                         <p><strong>Rain gauge value :</strong> {station.value}</p>
 
                         <hr />

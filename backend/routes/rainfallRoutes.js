@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 const https = require('https');
+const Rainfall = require('../models/Rainfall')
 
 const agent = new https.Agent({  
     rejectUnauthorized: false
@@ -10,7 +11,7 @@ const agent = new https.Agent({
 router.get('/fetch', async (req, res) => {
     try {
         const response = await axios.get('https://www.dhm.gov.np/frontend_dhm/hydrology/getRainfallFilter', { httpsAgent: agent });
-        console.log('API Response', response.data);
+        // console.log('API Response', response.data);
 
         // Assuming the rainfall data is in the first object in the array '0'
         const rainfallDataArray = response.data.data['0'];
@@ -23,9 +24,11 @@ router.get('/fetch', async (req, res) => {
                 basin: item.basin,                // Basin
                 longitude: item.longitude,        // Longitude
                 latitude: item.latitude,           // Latitude
-                value: item.value          // Latitude
+                value: item.value == null ? 0 : item.value  // Handle null values
 
             }));
+            await Rainfall.insertMany(rainfallDetails);
+
             
             console.log('Rainfall Details: ', rainfallDetails);
 
