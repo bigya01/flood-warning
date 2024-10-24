@@ -9,6 +9,8 @@ const rainfallSchema = new mongoose.Schema({
     status: { type: String, required: true },
     longitude: { type: Number, required: true },
     latitude: { type: Number, required: true },
+    value: { type: Number, required: true },
+
     totalRainfall: { type: Number }, // Add any field you need, e.g., totalRainfall
     timestamp: { type: Date, default: Date.now }
 });

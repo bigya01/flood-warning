@@ -22,7 +22,9 @@ router.get('/fetch', async (req, res) => {
                 status: item.status,              // Status, e.g., 'BELOW WARNING LEVEL'
                 basin: item.basin,                // Basin
                 longitude: item.longitude,        // Longitude
-                latitude: item.latitude           // Latitude
+                latitude: item.latitude,           // Latitude
+                value: item.value          // Latitude
+
             }));
             
             console.log('Rainfall Details: ', rainfallDetails);
