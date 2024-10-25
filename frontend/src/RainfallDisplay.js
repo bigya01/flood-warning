@@ -6,7 +6,7 @@ const RainfallDisplay = () => {
 
     const fetchRainfallData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/rainfall/fetch');
+            const response = await axios.get('http://localhost:5001/api/rainfall/fetch');
             const fetchedData = response.data.rainfallDetails;
 
             if (Array.isArray(fetchedData)) {
