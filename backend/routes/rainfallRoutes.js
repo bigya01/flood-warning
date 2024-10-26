@@ -13,6 +13,7 @@ const agent = new https.Agent({
 // Fetch rainfall data from API
 router.get('/fetch', async (req, res) => {
     try {
+        console.log("api fetched");
         const response = await axios.get('https://www.dhm.gov.np/frontend_dhm/hydrology/getRainfallFilter', { httpsAgent: agent });
         // Assuming the rainfall data is in the first object in the array '0'
         const rainfallDataArray = response.data.data['0'];
@@ -37,6 +38,7 @@ router.get('/fetch', async (req, res) => {
             if (!fs.existsSync(csvFilePath)) {
                 // If the file doesn't exist, create it and write data to CSV
                 const csvWriter = createCsvWriter({
+                    path:csvFilePath,
                     header: [
                         { id: 'longitude', title: 'Longitude' },
                         { id: 'latitude', title: 'Latitude' },
@@ -61,10 +63,3 @@ router.get('/fetch', async (req, res) => {
 });
 // Export the router
 module.exports = router;
-
-
-
-
-
-
-
