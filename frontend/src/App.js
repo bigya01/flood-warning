@@ -4,15 +4,22 @@ import Visualization from "./Frontend";
 import RainfallDisplay from "./RainfallDisplay";
 import { FaHome, FaInfo, FaPhone, FaEnvelope } from "react-icons/fa";
 import './App.css';
-import redMarkersData from './red.json'; // Import red markers JSON
 import greenMarkersData from './green.json'; // Import green markers JSON
 
 const App = () => {
-  const [redMarkers, setRedMarkers] = useState([]);
+  // Hardcoded red markers
+  const redMarkers = [
+    { lat: 27.700769, lng: 85.30014 }, // Kathmandu
+    { lat: 27.6713, lng: 85.324 },
+    { lat: 27.7509337, lng: 85.3320221 },
+    { lat: 29.97166667, lng: 81.81611111 },
+    { lat: 28.2096, lng: 83.9856 }
+  ];
+
   const [greenMarkers, setGreenMarkers] = useState([]);
 
   useEffect(() => {
-    // Convert JSON data to the required format
+    // Format and set green markers from JSON
     const formatMarkers = (markers) => 
       markers.map(marker => ({
         lat: marker.Latitude,
@@ -20,7 +27,6 @@ const App = () => {
         value: marker.Value
       }));
     
-    setRedMarkers(formatMarkers(redMarkersData));
     setGreenMarkers(formatMarkers(greenMarkersData));
 
     const checkProximity = (userLocation) => {
@@ -59,7 +65,7 @@ const App = () => {
       return R * c; // Distance in meters
     };
 
-    // Get user location
+    // Get user location and check proximity
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const userLocation = {
@@ -72,17 +78,15 @@ const App = () => {
         console.error("Geolocation error: ", error);
       }
     );
-  }, []); // Note: Dependency array is empty, so this runs once on mount.
+  }, []); // Dependency array is empty, so this runs once on mount.
 
   return (
     <div className="app-container">
-      {/* Navbar at the top */}
       <div className="navbar">
         <h1>Flood Monitoring System</h1>
         <p className="tagline">Stay Alert, Stay Safe</p>
       </div>
       <div className="content-container">
-        {/* Sidebar on the left */}
         <div className="sidebar">
           <ul>
             <li>
@@ -99,7 +103,6 @@ const App = () => {
             </li>
           </ul>
         </div>
-        {/* Main content (Map and other components) */}
         <div className="main-content">
           <MapComponent
             redMarkers={redMarkers}
@@ -117,6 +120,7 @@ const App = () => {
 };
 
 export default App;
+
 
 
 // import React, { useEffect } from "react";
