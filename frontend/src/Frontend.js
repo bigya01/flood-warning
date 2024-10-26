@@ -25,7 +25,7 @@ const Visualization = () => {
       ))} */}
 
       </div>
-      <div>
+      <div className='scatter'>
         <img src={scatter} alt="Precipitation Scatter Plot" />
       </div>
 
