@@ -11,7 +11,7 @@ import precipitation from './assets/precipittion.png';
 const Visualization = () => {
   return (
     <div className='all'>
-      <h2>Precipitation Analysis</h2>
+      <h1>Precipitation Analysis</h1>
 
       <div className="visualization-container">
         <div className='percep'>
@@ -25,6 +25,8 @@ const Visualization = () => {
       ))} */}
 
       </div>
+      <h1>Flood Alerts Based on Prediction</h1>
+
       <div className='scatter'>
         <img src={scatter} alt="Precipitation Scatter Plot" />
       </div>

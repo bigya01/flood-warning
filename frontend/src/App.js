@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import MapComponent from "./MapComponent";
-import Visualization from "./Frontend";
+// import MapComponent from "./MapComponent";
+// import Visualization from "./Frontend";
 import RainfallDisplay from "./RainfallDisplay";
 import { FaHome, FaInfo, FaPhone, FaEnvelope } from "react-icons/fa";
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Contact from './Contact';
+import About from "./About";
+import Home from "./Home";
 
 import greenMarkersData from './green.json'; // Import green markers JSON
 
 const App = () => {
-  console.log("App component is rendering"); // This should print when the component renders
 
   const [greenMarkers, setGreenMarkers] = useState([]);
 
@@ -115,12 +117,12 @@ const App = () => {
         </div>
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<MapComponent redMarkers={redMarkers} greenMarkers={greenMarkers} initialLatitude={28.3949} initialLongitude={84.124} zoomLevel={7} />} />
-            <Route path="/about" element={<div><h2>About</h2><p>Information about the Flood Monitoring System.</p></div>} />
-            <Route path="/contact" element={<div><h2>Contact Us</h2><p>Contact information goes here.</p></div>} />
+            <Route path="/" element={<Home redMarkers={redMarkers} greenMarkers={greenMarkers} /> } />
+            <Route path="/about" element={<div><h2>About</h2><p>Information about the Flood Monitoring System.</p><About /></div>} />
+            <Route path="/contact" element={<div><h2>Contact Us</h2><p>Contact information goes here.</p><Contact /></div>} />
             <Route path="/rainfall" element={<RainfallDisplay />} /> {/* Renders RainfallDisplay component at /rainfall */}
           </Routes>
-          <Visualization /> {/* Visualization always rendered in main-content */}
+           {/* Visualization always rendered in main-content */}
         </div>
       </div>
     </div>

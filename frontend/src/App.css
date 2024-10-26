@@ -52,42 +52,445 @@
   flex: 1;
   position: relative;
 }
+/* General Layout */
 .map-container {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-}
-.visualization-container {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
- width: 100%; 
-  
-}
-.percep{
-width: 100%;
-}
-.preciptiation{
-width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.scatter{
+/* Visualization Section Styles */
+.all {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.all h1 {
+  margin: 40px 0;
+  color: #1e3a8a;
+  font-size: 2.2rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.all h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background-color: #1e3a8a;
+  border-radius: 2px;
+}
+
+/* Container for visualizations */
+.visualization-container {
+  margin: 30px 0;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.visualization-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Individual visualization sections */
+.percep, .preciptiation {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.percep:hover, .preciptiation:hover {
+  transform: scale(1.02);
+}
+
+/* Scatter plot section */
+.scatter {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 40px 0;
+  padding: 30px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
 }
-.visualization-container img { 
-  /* flex: 1; */
-  /* height: 100%; */
-  height: 407px;
+
+.scatter:hover {
+  transform: translateY(-5px);
+}
+
+/* Image styling */
+.visualization-container img,
+.scatter img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.visualization-container img {
   width: 567px;
-  margin: 20px;
-} 
+  height: 407px;
+  object-fit: contain;
+}
+
+/* Map Component specific styles */
+.leaflet-container {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .visualization-container {
+    flex-direction: column;
+  }
+  
+  .visualization-container img {
+    margin: 20px 0;
+    width: 100%;
+    max-width: 567px;
+  }
+  
+  .all h1 {
+    font-size: 1.8rem;
+    margin: 30px 0;
+  }
+  
+  .scatter {
+    margin: 30px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .all {
+    padding: 10px;
+  }
+  
+  .visualization-container {
+    padding: 15px;
+  }
+  
+  .scatter {
+    padding: 15px;
+  }
+  
+  .all h1 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+  
+  .visualization-container img,
+  .scatter img {
+    height: auto;
+  }
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .visualization-container,
+  .scatter,
+  .percep,
+  .preciptiation {
+    transition: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .visualization-container,
+  .scatter {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}
 .linkk {
   color: white;
 }
+/* styles.css */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h2 {
+  margin: 20px 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.about {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* styles.css or RainfallDisplay.css */
+
+/* .rainfall-card {
+  background: #ffffff; /* White background for cards */
+  /* border: 1px solid #dcdcdc; /* Light gray border */
+  /* border-radius: 8px; Rounded corners */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Subtle shadow for depth */
+  /* padding: 20px; Inner spacing */
+  /* margin: 15px 0; Margin between cards */
+  /* transition: transform 0.2s; Smooth hover effect */ */
+/* } */ */
+/* 
+.rainfall-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+/* } */ */
+
+/* .rainfall-card h3 {
+  color: #007BFF;
+  margin: 0 0 10px; 
+} */
+
+/* .rainfall-card p {
+  margin: 5px 0; 
+} */
+
+.rainfall-card strong {
+  color: #333; 
+}
+
+
+/* for about */
+
+/* About Page Container */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #ffffff, #f8f9ff);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Header Styles */
+.container h2 {
+  color: #1e3a8a;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #1e3a8a, #60a5fa);
+  border-radius: 2px;
+}
+
+/* Toggle Button Styles */
+.container button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background: linear-gradient(to right, #1e3a8a, #2563eb);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+}
+
+.container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(to right, #1e40af, #1d4ed8);
+}
+
+.container button:active {
+  transform: translateY(0);
+}
+
+/* About Section Content */
+.about {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  animation: slideIn 0.5s ease-out;
+}
+
+.about p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #374151;
+  text-align: justify;
+  margin: 0;
+  padding: 10px;
+  position: relative;
+}
+
+.about p::first-letter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  float: left;
+  margin-right: 8px;
+  line-height: 1;
+}
+
+/* Animation Keyframes */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .container h2 {
+    font-size: 2rem;
+  }
+
+  .about {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .about p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .container button {
+    padding: 10px 24px;
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: linear-gradient(to bottom right, #1f2937, #111827);
+  }
+
+  .container h2 {
+    color: #60a5fa;
+  }
+
+  .about {
+    background: #1f2937;
+  }
+
+  .about p {
+    color: #e5e7eb;
+  }
+
+  .about p::first-letter {
+    color: #60a5fa;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .container button,
+  .about {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* contact page */
+
