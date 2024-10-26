@@ -1,5 +1,3 @@
-
-
 import React, { useEffect } from "react";
 import MapComponent from "./MapComponent";
 import Visualization from "./Frontend";
