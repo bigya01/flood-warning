@@ -1,0 +1,28 @@
+services:
+  # Backend service
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "5000:5000"  # Maps port 5000 on host to port 5000 in the container
+    volumes:
+      - ./backend:/app  # Mounts the backend folder to the container
+    networks:
+      - app-network
+
+  # Frontend service
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"  # Maps port 3000 on host to port 3000 in the container
+    volumes:
+      - ./frontend:/app  # Mounts the frontend folder to the container
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
