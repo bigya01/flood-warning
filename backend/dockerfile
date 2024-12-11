@@ -1,0 +1,20 @@
+# i am using official node image as the base
+FROM node:18-alpine
+
+# something called setting the working directory
+WORKDIR /app
+
+#now copying all packages files to the working directory
+COPY package*.json ./
+
+# now installing all the dependencies
+RUN npm install
+
+# copying all the files to the working directory    
+COPY . .
+
+# exposing the port 3000
+EXPOSE 3000
+
+# running the app   
+CMD ["npm", "start"]
